@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Search, Play, Bookmark, Star } from 'lucide-react'
+import { useState } from "react"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Search, Play, Bookmark, Star } from "lucide-react"
 
 interface Article {
   id: number
@@ -11,7 +11,7 @@ interface Article {
   category: string
   description: string
   duration: string
-  level: 'beginner' | 'intermediate' | 'advanced'
+  level: "beginner" | "intermediate" | "advanced"
   image: string
   saved?: boolean
 }
@@ -19,99 +19,98 @@ interface Article {
 const articles: Article[] = [
   {
     id: 1,
-    title: 'Understanding Balanced Nutrition',
-    category: 'Fundamentals',
-    description: 'Learn the essential food groups and how to create balanced meals for your family',
-    duration: '8 min read',
-    level: 'beginner',
-    image: '/balanced-nutrition-food-groups.jpg',
+    title: "Understanding Balanced Nutrition",
+    category: "Fundamentals",
+    description: "Learn the essential food groups and how to create balanced meals for your family",
+    duration: "8 min read",
+    level: "beginner",
+    image: "/balanced-nutrition-food-groups.jpg",
   },
   {
     id: 2,
-    title: 'Child Nutrition in the First 1000 Days',
-    category: 'Child Health',
-    description: 'Critical nutrition during infancy and early childhood for optimal growth',
-    duration: '12 min read',
-    level: 'beginner',
-    image: '/baby-infant-nutrition.jpg',
+    title: "Child Nutrition in the First 1000 Days",
+    category: "Child Health",
+    description: "Critical nutrition during infancy and early childhood for optimal growth",
+    duration: "12 min read",
+    level: "beginner",
+    image: "/baby-infant-nutrition.jpg",
   },
   {
     id: 3,
-    title: 'Local Foods High in Iron and Protein',
-    category: 'Local Resources',
-    description: 'Discover nutritious local foods available in Rwanda and how to use them',
-    duration: '10 min read',
-    level: 'intermediate',
-    image: '/beans-grains-protein.jpg',
+    title: "Local Foods High in Iron and Protein",
+    category: "Local Resources",
+    description: "Discover nutritious local foods available in Rwanda and how to use them",
+    duration: "10 min read",
+    level: "intermediate",
+    image: "/beans-grains-protein.jpg",
   },
   {
     id: 4,
-    title: 'Nutrition for Pregnant Women',
-    category: 'Maternal Health',
-    description: 'Essential nutrients and dietary guidelines for healthy pregnancy',
-    duration: '15 min read',
-    level: 'beginner',
-    image: '/pregnant-woman-nutrition.jpg',
+    title: "Nutrition for Pregnant Women",
+    category: "Maternal Health",
+    description: "Essential nutrients and dietary guidelines for healthy pregnancy",
+    duration: "15 min read",
+    level: "beginner",
+    image: "/pregnant-woman-nutrition.jpg",
   },
   {
     id: 5,
-    title: 'Managing Malnutrition Signs',
-    category: 'Health Awareness',
-    description: 'Recognize early warning signs of malnutrition and when to seek help',
-    duration: '10 min read',
-    level: 'intermediate',
-    image: '/healthcare-nutrition-signs.jpg',
+    title: "Managing Malnutrition Signs",
+    category: "Health Awareness",
+    description: "Recognize early warning signs of malnutrition and when to seek help",
+    duration: "10 min read",
+    level: "intermediate",
+    image: "/healthcare-nutrition-signs.jpg",
   },
   {
     id: 6,
-    title: 'Water, Sanitation & Nutrition',
-    category: 'Health & Hygiene',
-    description: 'How clean water and hygiene practices support better nutrition',
-    duration: '9 min read',
-    level: 'beginner',
-    image: '/water-sanitation-hygiene.jpg',
+    title: "Water, Sanitation & Nutrition",
+    category: "Health & Hygiene",
+    description: "How clean water and hygiene practices support better nutrition",
+    duration: "9 min read",
+    level: "beginner",
+    image: "/water-sanitation-hygiene.jpg",
   },
   {
     id: 7,
-    title: 'Budget-Friendly Nutritious Meals',
-    category: 'Practical Tips',
-    description: 'Plan nutritious meals without breaking the budget',
-    duration: '11 min read',
-    level: 'intermediate',
-    image: '/budget-cooking-meals.jpg',
+    title: "Budget-Friendly Nutritious Meals",
+    category: "Practical Tips",
+    description: "Plan nutritious meals without breaking the budget",
+    duration: "11 min read",
+    level: "intermediate",
+    image: "/budget-cooking-meals.jpg",
   },
   {
     id: 8,
-    title: 'Dietary Diversity Score Guide',
-    category: 'Tracking Tools',
-    description: 'Understand and improve your family\'s dietary diversity',
-    duration: '7 min read',
-    level: 'advanced',
-    image: '/food-variety-diversity.jpg',
+    title: "Dietary Diversity Score Guide",
+    category: "Tracking Tools",
+    description: "Understand and improve your family's dietary diversity",
+    duration: "7 min read",
+    level: "advanced",
+    image: "/food-variety-diversity.jpg",
   },
 ]
 
 export function EducationHubClient() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedLevel, setSelectedLevel] = useState('all')
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedLevel, setSelectedLevel] = useState("all")
   const [savedArticles, setSavedArticles] = useState<number[]>([])
 
-  const categories = ['all', ...new Set(articles.map(a => a.category))]
-  const levels = ['all', 'beginner', 'intermediate', 'advanced']
+  const categories = ["all", ...new Set(articles.map((a) => a.category))]
+  const levels = ["all", "beginner", "intermediate", "advanced"]
 
-  const filteredArticles = articles.filter(article => {
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filteredArticles = articles.filter((article) => {
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory
-    const matchesLevel = selectedLevel === 'all' || article.level === selectedLevel
+    const matchesCategory = selectedCategory === "all" || article.category === selectedCategory
+    const matchesLevel = selectedLevel === "all" || article.level === selectedLevel
     return matchesSearch && matchesCategory && matchesLevel
   })
 
   const toggleSaved = (id: number) => {
-    setSavedArticles(prev =>
-      prev.includes(id) ? prev.filter(aid => aid !== id) : [...prev, id]
-    )
+    setSavedArticles((prev) => (prev.includes(id) ? prev.filter((aid) => aid !== id) : [...prev, id]))
   }
 
   return (
@@ -147,7 +146,7 @@ export function EducationHubClient() {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="w-full px-3 py-2 border border-neutral-200 rounded-lg"
                 >
-                  {categories.map(cat => (
+                  {categories.map((cat) => (
                     <option key={cat} value={cat}>
                       {cat.charAt(0).toUpperCase() + cat.slice(1)}
                     </option>
@@ -162,7 +161,7 @@ export function EducationHubClient() {
                   onChange={(e) => setSelectedLevel(e.target.value)}
                   className="w-full px-3 py-2 border border-neutral-200 rounded-lg"
                 >
-                  {levels.map(level => (
+                  {levels.map((level) => (
                     <option key={level} value={level}>
                       {level.charAt(0).toUpperCase() + level.slice(1)}
                     </option>
@@ -176,7 +175,7 @@ export function EducationHubClient() {
         {/* Articles Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {filteredArticles.length > 0 ? (
-            filteredArticles.map(article => (
+            filteredArticles.map((article) => (
               <Card key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
                 <div className="h-40 bg-neutral-200 relative overflow-hidden">
                   <img
@@ -191,9 +190,7 @@ export function EducationHubClient() {
                     >
                       <Bookmark
                         className={`w-5 h-5 ${
-                          savedArticles.includes(article.id)
-                            ? 'fill-amber-600 text-amber-600'
-                            : 'text-neutral-400'
+                          savedArticles.includes(article.id) ? "fill-amber-600 text-amber-600" : "text-neutral-400"
                         }`}
                       />
                     </button>
@@ -205,19 +202,18 @@ export function EducationHubClient() {
                     <span className="text-xs px-2 py-1 bg-amber-100 text-amber-700 rounded-full">
                       {article.category}
                     </span>
-                    <span className="text-xs text-neutral-500 capitalize">
-                      {article.level}
-                    </span>
+                    <span className="text-xs text-neutral-500 capitalize">{article.level}</span>
                   </div>
 
                   <h3 className="font-bold text-lg mb-2 line-clamp-2">{article.title}</h3>
-                  <p className="text-sm text-neutral-600 mb-4 line-clamp-3 flex-1">
-                    {article.description}
-                  </p>
+                  <p className="text-sm text-neutral-600 mb-4 line-clamp-3 flex-1">{article.description}</p>
 
                   <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
                     <span className="text-xs text-neutral-500">{article.duration}</span>
-                    <Button size="sm" className="bg-amber-600 hover:bg-amber-700 text-white">
+                    <Button
+                      onClick={() => (window.location.href = `/dashboard/education/article/${article.id}`)}
+                      className="bg-amber-600 hover:bg-amber-700 text-white"
+                    >
                       <Play className="w-4 h-4 mr-1" />
                       Read
                     </Button>
@@ -230,9 +226,9 @@ export function EducationHubClient() {
               <p className="text-neutral-500 text-lg">No articles found matching your filters</p>
               <Button
                 onClick={() => {
-                  setSearchQuery('')
-                  setSelectedCategory('all')
-                  setSelectedLevel('all')
+                  setSearchQuery("")
+                  setSelectedCategory("all")
+                  setSelectedLevel("all")
                 }}
                 variant="outline"
                 className="mt-4"
@@ -251,7 +247,7 @@ export function EducationHubClient() {
               <h3 className="text-lg font-bold">Saved Articles ({savedArticles.length})</h3>
             </div>
             <p className="text-neutral-600">
-              You have saved {savedArticles.length} article{savedArticles.length !== 1 ? 's' : ''} for later reading
+              You have saved {savedArticles.length} article{savedArticles.length !== 1 ? "s" : ""} for later reading
             </p>
           </Card>
         )}
